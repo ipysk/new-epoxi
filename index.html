@@ -5,119 +5,245 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>New Epoxi | Acabamento Industrial Premium</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
         :root {
             --accent: #10b981;
-            --dark: #050505;
-            --glass: rgba(15, 15, 15, 0.9);
-            --border: rgba(255, 255, 255, 0.1);
+            --accent-glow: rgba(16, 185, 129, 0.15);
+            --dark: #070908;
+            --surface: #0f1311;
+            --surface-card: #141a17;
+            --border: rgba(255, 255, 255, 0.05);
+            --text-main: #e2e8f0;
+            --text-muted: #94a3b8;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
 
         body {
             background: var(--dark);
-            color: #e0e0e0;
-            background-image: radial-gradient(circle at 50% 0%, #0a1a12 0%, #050505 100%);
+            color: var(--text-main);
+            background-image: radial-gradient(circle at 50% 0%, #0d2419 0%, #070908 70%);
             background-attachment: fixed;
             overflow-x: hidden;
+            padding-bottom: 70px; /* Espaço para o menu inferior no mobile */
         }
 
-        /* --- NAVEGAÇÃO --- */
+        /* --- NAVEGAÇÃO SUPERIOR --- */
         nav {
-            display: flex; flex-direction: column; align-items: center;
-            padding: 15px; background: rgba(5, 5, 5, 0.98);
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 20px 8%; background: rgba(7, 9, 8, 0.85);
             position: fixed; width: 100%; top: 0; z-index: 1000;
-            border-bottom: 1px solid var(--border); backdrop-filter: blur(15px);
+            border-bottom: 1px solid var(--border); backdrop-filter: blur(20px);
         }
         
-        .logo { font-weight: 800; color: white; cursor: pointer; font-size: 1.2rem; letter-spacing: 2px; }
+        .logo { font-weight: 800; color: white; cursor: pointer; font-size: 1.3rem; letter-spacing: 2px; }
         .logo span { color: var(--accent); }
 
-        .nav-links { display: flex; list-style: none; gap: 20px; margin-top: 10px; }
+        .nav-links { display: flex; list-style: none; gap: 40px; }
         .nav-links li { 
-            cursor: pointer; font-size: 0.75rem; text-transform: uppercase; color: #666; 
-            transition: 0.3s; padding-bottom: 5px;
+            cursor: pointer; font-size: 0.85rem; text-transform: uppercase; color: var(--text-muted); 
+            transition: 0.3s; padding-bottom: 5px; font-weight: 600; letter-spacing: 1px;
         }
+        .nav-links li:hover { color: white; }
         .nav-links li.active { color: var(--accent); font-weight: 800; border-bottom: 2px solid var(--accent); }
 
+        /* --- MENU INFERIOR MOBILE --- */
+        .bottom-nav {
+            position: fixed; bottom: 0; left: 0; width: 100%; background: rgba(15, 19, 17, 0.95);
+            border-top: 1px solid var(--border); display: flex; justify-content: space-around;
+            padding: 12px 0; z-index: 1000; backdrop-filter: blur(10px);
+        }
+        .bottom-nav-item {
+            display: flex; flex-direction: column; align-items: center; gap: 4px;
+            color: var(--text-muted); font-size: 0.7rem; text-transform: uppercase;
+            font-weight: 600; cursor: pointer; transition: 0.3s; text-decoration: none;
+        }
+        .bottom-nav-item i { font-size: 1.2rem; }
+        .bottom-nav-item.active { color: var(--accent); }
+
         /* --- CONTAINER --- */
-        .container { max-width: 1100px; margin: 140px auto 30px; padding: 0 20px; }
+        .container { max-width: 1200px; margin: 120px auto 40px; padding: 0 20px; }
 
         .tab-content { display: none; }
-        .tab-content.active { display: block; animation: fadeIn 0.5s ease; }
+        .tab-content.active { display: block; animation: fadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
 
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* --- TEXTO DE INTRODUÇÃO --- */
-        .intro-text { text-align: center; max-width: 800px; margin: 0 auto 60px; }
-        .intro-text h2 { font-size: 2.2rem; margin-bottom: 20px; font-weight: 200; }
-        .intro-text h2 b { font-weight: 800; color: var(--accent); }
-        .intro-text p { color: #94a3b8; line-height: 1.8; font-size: 1.1rem; }
+        /* --- TÍTULOS GERAIS --- */
+        .section-header { text-align: center; max-width: 700px; margin: 0 auto 60px; }
+        .section-header h2 { font-size: 2.5rem; font-weight: 300; color: white; margin-bottom: 15px; }
+        .section-header h2 b { font-weight: 800; color: var(--accent); }
+        .section-header p { color: var(--text-muted); font-size: 1.1rem; line-height: 1.6; }
 
-        /* --- LAYOUT ZIGUEZAGUE (HOME) --- */
-        .feature-row { display: flex; align-items: center; gap: 40px; margin-bottom: 80px; }
-        .feature-row.reverse { flex-direction: row-reverse; }
-        .feature-image { flex: 1.2; border-radius: 30px; overflow: hidden; border: 1px solid var(--border); height: 400px; background: #111; }
-        .feature-image img { width: 100%; height: 100%; object-fit: cover; }
+        /* ==================== HOME ==================== */
+        .hero-banner {
+            text-align: center; padding: 60px 0; max-width: 800px; margin: 0 auto;
+        }
+        .hero-banner h1 { font-size: 3.5rem; font-weight: 800; line-height: 1.2; margin-bottom: 20px; color: white; }
+        .hero-banner h1 span { color: var(--accent); }
+        .hero-banner p { font-size: 1.2rem; color: var(--text-muted); margin-bottom: 40px; }
 
-        .feature-text { flex: 1; }
-        .feature-text h2 { font-size: 2.5rem; margin-bottom: 20px; color: white; font-weight: 800; }
-        .feature-text p { margin-bottom: 30px; color: #94a3b8; line-height: 1.7; }
-        .tag { color: var(--accent); font-size: 0.75rem; font-weight: 800; letter-spacing: 3px; margin-bottom: 15px; display: block; }
+        .home-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-bottom: 80px; }
+        .home-card { 
+            background: var(--surface-card); border: 1px solid var(--border); border-radius: 24px; 
+            overflow: hidden; transition: 0.4s; cursor: pointer; display: flex; flex-direction: column;
+        }
+        .home-card:hover { transform: translateY(-5px); border-color: var(--accent); box-shadow: 0 10px 30px var(--accent-glow); }
+        .home-card-img { height: 220px; background: #111; overflow: hidden; position: relative; }
+        .home-card-img img { width: 100%; height: 100%; object-fit: cover; }
+        .home-card-body { padding: 30px; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; }
+        .home-card-body h3 { font-size: 1.4rem; color: white; margin-bottom: 12px; font-weight: 700; }
+        .home-card-body p { color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; margin-bottom: 20px; }
+        .card-link { color: var(--accent); font-weight: 700; font-size: 0.85rem; text-transform: uppercase; display: flex; align-items: center; gap: 8px; }
+
+        /* ==================== SERVIÇOS ==================== */
+        .services-wrapper { display: flex; flex-direction: column; gap: 100px; }
+        .service-block { display: flex; align-items: center; gap: 60px; }
+        .service-block.reverse { flex-direction: row-reverse; }
+        .service-visual { flex: 1.2; height: 450px; border-radius: 32px; overflow: hidden; border: 1px solid var(--border); position: relative; }
+        .service-visual img { width: 100%; height: 100%; object-fit: cover; }
+        .service-desc { flex: 1; }
+        .service-desc .tag { color: var(--accent); font-weight: 800; font-size: 0.75rem; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 15px; display: block; }
+        .service-desc h3 { font-size: 2.5rem; color: white; margin-bottom: 20px; font-weight: 800; }
+        .service-desc p { color: var(--text-muted); line-height: 1.8; font-size: 1.05rem; margin-bottom: 30px; }
         
-        .btn-outline { background: transparent; border: 1px solid var(--accent); color: var(--accent); padding: 15px 30px; border-radius: 50px; cursor: pointer; font-weight: 700; text-transform: uppercase; transition: 0.3s; }
-        .btn-outline:hover { background: var(--accent); color: white; }
+        /* Grade de Cores */
+        .color-catalog { margin-top: 25px; }
+        .color-catalog-title { font-size: 0.9rem; font-weight: 700; color: white; margin-bottom: 15px; letter-spacing: 1px; text-transform: uppercase; }
+        .color-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(65px, 1fr)); gap: 10px; }
+        .color-dot { 
+            height: 45px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); 
+            cursor: pointer; transition: 0.3s; position: relative;
+        }
+        .color-dot:hover { transform: scale(1.15); z-index: 2; box-shadow: 0 5px 15px rgba(0,0,0,0.5); }
+        
+        .color-dot::after {
+            content: attr(data-name); position: absolute; bottom: 125%; left: 50%; transform: translateX(-50%);
+            background: #000; color: #fff; padding: 5px 10px; border-radius: 6px; font-size: 0.65rem;
+            white-space: nowrap; opacity: 0; pointer-events: none; transition: 0.2s; border: 1px solid var(--border);
+        }
+        .color-dot:hover::after { opacity: 1; }
 
-        /* --- SERVIÇOS (CARDS) --- */
-        .product-card { background: var(--glass); border: 1px solid var(--border); border-radius: 40px; overflow: hidden; margin-bottom: 40px; }
-        .product-img-large { width: 100%; height: 400px; background: #111; border-bottom: 1px solid var(--border); }
-        .product-img-large img { width: 100%; height: 100%; object-fit: cover; }
-        .product-info { padding: 40px; }
-        .product-info h3 { font-size: 2rem; color: white; margin-bottom: 15px; }
+        /* ==================== PORTFÓLIO ==================== */
+        .portfolio-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
+        .portfolio-item { aspect-ratio: 1/1; border-radius: 24px; overflow: hidden; border: 1px solid var(--border); cursor: pointer; position: relative; }
+        .portfolio-item img { width: 100%; height: 100%; object-fit: cover; transition: 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
+        .portfolio-item:hover img { transform: scale(1.08); }
+        .portfolio-overlay { 
+            position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.8), transparent); 
+            opacity: 0; transition: 0.3s; display: flex; align-items: flex-end; padding: 25px;
+        }
+        .portfolio-item:hover .portfolio-overlay { opacity: 1; }
+        .portfolio-overlay p { color: white; font-weight: 600; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; }
 
-        /* --- PORTFÓLIO (SEM FILTRO) --- */
-        .portfolio-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 15px; margin-top: 30px; }
-        .portfolio-item { aspect-ratio: 1/1; border-radius: 20px; overflow: hidden; border: 1px solid var(--border); cursor: pointer; background: #111; position: relative; }
-        .portfolio-item img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; filter: none !important; }
-        .portfolio-item:hover img { transform: scale(1.05); }
+        /* ==================== SOBRE NÓS ==================== */
+        .about-story { display: flex; align-items: center; gap: 60px; margin-bottom: 20px; }
+        .about-img { flex: 1; height: 500px; border-radius: 32px; overflow: hidden; border: 1px solid var(--border); }
+        .about-img img { width: 100%; height: 100%; object-fit: cover; }
+        .about-text { flex: 1.2; }
+        .about-text p { color: var(--text-muted); line-height: 1.9; font-size: 1.1rem; margin-bottom: 25px; text-align: justify; }
+        .about-text p b { color: white; font-weight: 600; }
+        
+        /* --- BLOCOS DE CTA (CONVERTENDO EM TODAS AS ABAS) --- */
+        .cta-box {
+            background: linear-gradient(135deg, var(--surface-card) 0%, #0d2419 100%);
+            border: 1px solid var(--border); padding: 50px; border-radius: 32px; text-align: center; margin: 80px auto 40px; max-width: 1000px;
+        }
+        .cta-box h3 { font-size: 2rem; color: white; margin-bottom: 15px; font-weight: 800; }
+        .cta-box p { color: var(--text-muted); max-width: 600px; margin: 0 auto 30px; line-height: 1.6; }
+        .cta-box .cta-buttons { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
+
+        /* --- BOTÕES --- */
+        .btn-outline { background: transparent; border: 1px solid var(--accent); color: var(--accent); padding: 15px 32px; border-radius: 50px; cursor: pointer; font-weight: 700; text-transform: uppercase; transition: 0.3s; letter-spacing: 1px; font-size: 0.8rem; }
+        .btn-outline:hover { background: var(--accent); color: white; box-shadow: 0 5px 15px var(--accent-glow); }
+        .btn-filled { background: var(--accent); border: 1px solid var(--accent); color: white; padding: 15px 32px; border-radius: 50px; cursor: pointer; font-weight: 700; text-transform: uppercase; transition: 0.3s; letter-spacing: 1px; font-size: 0.8rem; display: inline-flex; align-items: center; gap: 10px; }
+        .btn-filled:hover { opacity: 0.9; transform: translateY(-2px); box-shadow: 0 5px 20px var(--accent-glow); }
 
         /* --- MODAL --- */
-        #modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 9999; justify-content: center; align-items: center; }
-        #modal-img { max-width: 90%; max-height: 85vh; border-radius: 10px; border: 2px solid var(--accent); }
-        .close-btn { position: absolute; top: 20px; right: 30px; color: white; font-size: 40px; cursor: pointer; }
+        #modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(5,7,6,0.98); z-index: 9999; justify-content: center; align-items: center; }
+        #modal-img { max-width: 90%; max-height: 80vh; border-radius: 16px; border: 1px solid rgba(255,255,255,0.1); }
+        .close-btn { position: absolute; top: 30px; right: 40px; color: white; font-size: 40px; cursor: pointer; opacity: 0.7; transition: 0.3s; }
+        .close-btn:hover { opacity: 1; }
 
-        /* --- FORMULÁRIO --- */
-        .research-form { background: var(--glass); border: 1px solid var(--border); padding: 40px; border-radius: 40px; max-width: 800px; margin: 60px auto; }
+        /* --- FORMULÁRIO DE ORÇAMENTO --- */
+        .research-form { background: var(--surface); border: 1px solid var(--border); padding: 50px; border-radius: 32px; max-width: 800px; margin: 80px auto 40px; }
         .form-group { margin-bottom: 20px; }
-        .form-group label { display: block; margin-bottom: 8px; font-weight: 600; color: white; }
-        input, textarea { width: 100%; padding: 15px; background: rgba(255,255,255,0.05); border: 1px solid var(--border); color: white; border-radius: 12px; }
-        .btn-send { width: 100%; padding: 20px; background: var(--accent); border: none; border-radius: 15px; font-weight: 800; color: white; cursor: pointer; text-transform: uppercase; margin-top: 10px; transition: 0.3s; }
+        .form-group label { display: block; margin-bottom: 8px; font-weight: 600; color: white; font-size: 0.9rem; }
+        input, textarea { width: 100%; padding: 16px; background: rgba(255,255,255,0.02); border: 1px solid var(--border); color: white; border-radius: 14px; transition: 0.3s; }
+        input:focus, textarea:focus { outline: none; border-color: var(--accent); background: rgba(255,255,255,0.05); }
+        .btn-send { width: 100%; padding: 20px; background: var(--accent); border: none; border-radius: 16px; font-weight: 800; color: white; cursor: pointer; text-transform: uppercase; margin-top: 10px; transition: 0.3s; letter-spacing: 1px; }
         .btn-send:hover { opacity: 0.9; transform: translateY(-2px); }
 
-        footer { text-align: center; padding: 60px; color: #444; border-top: 1px solid var(--border); font-size: 0.8rem; }
+        /* --- RODAPÉ PREMIUM --- */
+        footer { 
+            background: #0b0f0d; border-top: 1px solid var(--border); padding: 60px 0 20px; 
+            margin-top: 100px; font-size: 0.9rem; color: var(--text-muted);
+        }
+        .footer-container { max-width: 1200px; margin: 0 auto; padding: 0 20px; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; margin-bottom: 40px; }
+        .footer-brand h3 { color: white; font-weight: 800; letter-spacing: 2px; margin-bottom: 15px; }
+        .footer-brand h3 span { color: var(--accent); }
+        .footer-info h4, .footer-links h4 { color: white; font-weight: 700; margin-bottom: 20px; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 1px; }
+        .footer-info p { margin-bottom: 12px; display: flex; align-items: center; gap: 10px; line-height: 1.5; }
+        .footer-info i { color: var(--accent); }
+        .footer-links ul { list-style: none; }
+        .footer-links li { margin-bottom: 10px; cursor: pointer; transition: 0.3s; }
+        .footer-links li:hover { color: white; }
+        .footer-bottom { text-align: center; border-top: 1px solid rgba(255,255,255,0.02); padding-top: 20px; font-size: 0.8rem; color: #444; }
 
-        @media (min-width: 900px) {
-            nav { flex-direction: row; justify-content: space-between; padding: 20px 8%; }
-            .nav-links { margin-top: 0; gap: 40px; }
-            .nav-links li { font-size: 0.85rem; }
+        /* --- RESPONSIVIDADE --- */
+        @media (max-width: 900px) {
+            nav { padding: 15px 5%; justify-content: center; }
+            .nav-links { display: none; } 
+            .container { margin-top: 80px; }
+            .hero-banner h1 { font-size: 2.3rem; }
+            .service-block, .service-block.reverse, .about-story { flex-direction: column; gap: 30px; }
+            .service-visual, .about-img { width: 100%; height: 300px; border-radius: 20px; }
+            .section-header h2 { font-size: 2rem; }
+            .service-desc h3 { font-size: 1.8rem; }
+            .cta-box { padding: 35px 20px; }
+            .cta-box .cta-buttons { flex-direction: column; gap: 12px; width: 100%; }
+            .cta-box .cta-buttons button, .cta-box .cta-buttons a { width: 100%; justify-content: center; }
+            .research-form { padding: 30px 20px; }
+        }
+
+        @media (min-width: 901px) {
+            .bottom-nav { display: none; } 
         }
     </style>
 </head>
 <body>
 
+    <!-- NAVEGAÇÃO SUPERIOR (DESKTOP) -->
     <nav>
         <div class="logo" onclick="showTab('inicio')">NEW<span>EPOXI</span></div>
         <ul class="nav-links">
             <li onclick="showTab('inicio')" id="link-inicio" class="active">Início</li>
-            <li onclick="showTab('jornada')" id="link-jornada">A Empresa</li>
             <li onclick="showTab('servicos')" id="link-servicos">Serviços</li>
             <li onclick="showTab('portfolio')" id="link-portfolio">Portfólio</li>
+            <li onclick="showTab('jornada')" id="link-jornada">Sobre Nós</li>
         </ul>
     </nav>
 
+    <!-- MENU INFERIOR FLUTUANTE (MOBILE) -->
+    <div class="bottom-nav">
+        <a class="bottom-nav-item active" id="m-link-inicio" onclick="showTab('inicio')">
+            <i class="fa-solid fa-house"></i>Início
+        </a>
+        <a class="bottom-nav-item" id="m-link-servicos" onclick="showTab('servicos')">
+            <i class="fa-solid fa-gears"></i>Serviços
+        </a>
+        <a class="bottom-nav-item" id="m-link-portfolio" onclick="showTab('portfolio')">
+            <i class="fa-solid fa-images"></i>Portfólio
+        </a>
+        <a class="bottom-nav-item" id="m-link-jornada" onclick="showTab('jornada')">
+            <i class="fa-solid fa-building"></i>Sobre
+        </a>
+    </div>
+
+    <!-- MODAL DE IMAGEM -->
     <div id="modal" onclick="closeModal()">
         <span class="close-btn">&times;</span>
         <img id="modal-img" src="">
@@ -125,25 +251,63 @@
 
     <div class="container">
         
+        <!-- ==================== ABA 1: HOME ==================== -->
         <section id="inicio" class="tab-content active">
-            <div class="intro-text">
-                <h2>Transformando <b>superfícies</b> em resistência.</h2>
-                <p>Na New Epoxi Pinturas, unimos tecnologia e rigor técnico para garantir acabamentos de alta durabilidade para o setor industrial e metalúrgico.</p>
+            <div class="hero-banner">
+                <h1>Engenharia de Superfície e <span>Alta Performance</span></h1>
+                <p>Soluções industriais premium em pintura eletrostática, jateamento e tratamento químico anticorrosivo com alto padrão de rigor técnico.</p>
+                <button class="btn-filled" onclick="scrollToForm()"><i class="fa-solid fa-file-invoice-dollar"></i> Solicitar Orçamento Direto</button>
             </div>
 
-            <div class="feature-row">
-                <div class="feature-image"><img src="pintura.png" alt="Pintura"></div>
-                <div class="feature-text">
-                    <span class="tag">QUALIDADE</span>
-                    <h2>Pintura Eletrostática.</h2>
-                    <p>Processo que garante cobertura 100% uniforme e resistência extrema contra corrosão.</p>
-                    <button class="btn-outline" onclick="showTab('servicos')">Ver Serviços</button>
+            <!-- CARDS DE ENCAMINHAMENTO -->
+            <div class="home-grid">
+                <div class="home-card" onclick="showTab('servicos')">
+                    <div class="home-card-img"><img src="pint.jpg" alt="Serviços New Epoxi"></div>
+                    <div class="home-card-body">
+                        <div>
+                            <h3>Nossos Serviços</h3>
+                            <p>Explore nossa linha de tratamentos e acabamentos de alta resistência química e mecânica sob medida para seu projeto.</p>
+                        </div>
+                        <span class="card-link">Conhecer Processos <i class="fa-solid fa-arrow-right"></i></span>
+                    </div>
+                </div>
+
+                <div class="home-card" onclick="showTab('portfolio')">
+                    <div class="home-card-img"><img src="foto1.jpeg" alt="Portfólio New Epoxi"></div>
+                    <div class="home-card-body">
+                        <div>
+                            <h3>Galeria de Resultados</h3>
+                            <p>Veja projetos executados e o padrão estético impecável entregue às principais indústrias e metalúrgicas parceiras.</p>
+                        </div>
+                        <span class="card-link">Ver Portfólio <i class="fa-solid fa-arrow-right"></i></span>
+                    </div>
+                </div>
+
+                <div class="home-card" onclick="showTab('jornada')">
+                    <div class="home-card-img"><img src="image_ed7afc.jpg" alt="A Empresa New Epoxi"></div>
+                    <div class="home-card-body">
+                        <div>
+                            <h3>Nossa Infraestrutura</h3>
+                            <p>Saiba mais sobre nossa história baseada em Pomerode/SC e nosso compromisso inegociável com a agilidade e durabilidade.</p>
+                        </div>
+                        <span class="card-link">Conhecer Empresa <i class="fa-solid fa-arrow-right"></i></span>
+                    </div>
                 </div>
             </div>
 
-            <div class="research-form">
-                <h2 style="text-align: center; color: white; margin-bottom: 10px;">Solicite um Orçamento</h2>
-                <p style="text-align: center; color: var(--accent); margin-bottom: 40px; font-weight: 600;">Resposta rápida em horário comercial</p>
+            <!-- CTA HOME (INTEGRADO ANTES DO FORMULÁRIO) -->
+            <div class="cta-box" style="margin-bottom: 0px;">
+                <h3>Tem um projeto urgente ou demanda seriada?</h3>
+                <p>Nossa equipe está de prontidão para analisar os detalhes técnicos do seu material e desenhar a melhor logística de entrega.</p>
+                <div class="cta-buttons">
+                    <a href="https://wa.me/5547999984246" target="_blank" class="btn-filled" style="text-decoration: none;"><i class="fa-brands fa-whatsapp"></i> Conversar pelo WhatsApp</a>
+                </div>
+            </div>
+
+            <!-- FORMULÁRIO DE SOLICITAÇÃO -->
+            <div class="research-form" id="orcamento-form">
+                <h2 style="text-align: center; color: white; margin-bottom: 10px; font-weight: 800;">Solicite um Orçamento</h2>
+                <p style="text-align: center; color: var(--accent); margin-bottom: 40px; font-weight: 600;">Atendimento ágil para demandas industriais</p>
                 
                 <form onsubmit="enviarWhatsApp(event)">
                     <div class="form-group">
@@ -152,7 +316,7 @@
                     </div>
                     <div class="form-group">
                         <label>Tipo de Serviço:</label>
-                        <input type="text" id="form-servico" placeholder="Ex: Pintura em 500 peças de alumínio">
+                        <input type="text" id="form-servico" placeholder="Ex: Pintura em lote de peças de alumínio">
                     </div>
                     <div class="form-group">
                         <label>Seu E-mail ou WhatsApp:</label>
@@ -160,76 +324,210 @@
                     </div>
                     <div class="form-group">
                         <label>Detalhes do Projeto:</label>
-                        <textarea id="form-mensagem" rows="4" placeholder="Descreva as dimensões, cores e prazos..."></textarea>
+                        <textarea id="form-mensagem" rows="4" placeholder="Descreva as dimensões, cores desejadas, prazos estimadas ou detalhes técnicos..."></textarea>
                     </div>
                     <button type="submit" class="btn-send">Enviar Solicitação via WhatsApp</button>
                 </form>
             </div>
         </section>
 
-        <section id="jornada" class="tab-content">
-            <div class="feature-row">
-                <div class="feature-image"><img src="image_ed7afc.jpg" alt="Unidade"></div>
-                <div class="feature-text">
-                    <span class="tag">NOSSA HISTÓRIA</span>
-                    <h2>Tradição em Pomerode.</h2>
-                    <p>A New Epoxi nasceu para atender a demanda por acabamentos de alto padrão. Localizada no polo industrial catarinense, entregamos agilidade e precisão técnica.</p>
+
+        <!-- ==================== ABA 2: SERVIÇOS ==================== -->
+        <section id="servicos" class="tab-content">
+            <div class="section-header">
+                <h2>Soluções Industriais <b>Especializadas</b></h2>
+                <p>Processos integrados que garantem a preparação profunda do material e uma camada de proteção extrema contra intempéries e atrito mecânico.</p>
+            </div>
+
+            <div class="services-wrapper">
+                <!-- Serviço 1: Pintura Eletrostática -->
+                <div class="service-block">
+                    <div class="service-visual"><img src="pint.jpg" alt="Pintura Eletrostática"></div>
+                    <div class="service-desc">
+                        <span class="tag">Processo Principal</span>
+                        <h3>Pintura Eletrostática a Pó</h3>
+                        <p>Utilizando o princípio de atração eletrostática, a tinta em pó recebe uma carga elétrica oposta à da peça. Isso resulta em uma ancoragem e cobertura de 100% da superfície de forma perfeitamente uniforme, alcançando inclusive cavidades de difícil acesso. Posteriormente, a cura em estufa de alta temperatura funde o polímero, conferindo excelente aspecto estético e proteção máxima contra corrosão e impactos.</p>
+                        
+                        <div class="color-catalog">
+                            <h4 class="color-catalog-title"><i class="fa-solid fa-palette" style="color: var(--accent); margin-right: 8px;"></i> Amostras Disponíveis (Principais Cores):</h4>
+                            <div class="color-grid">
+                                <div class="color-dot" style="background: #ffffff;" data-name="Branco Brilhante"></div>
+                                <div class="color-dot" style="background: #0a0a0a;" data-name="Preto Fosco"></div>
+                                <div class="color-dot" style="background: #1a1a1a;" data-name="Preto Brilhante Texturizado"></div>
+                                <div class="color-dot" style="background: #555555;" data-name="Cinza Ral 7011"></div>
+                                <div class="color-dot" style="background: #7a7a7a;" data-name="Cinza Ral 7035"></div>
+                                <div class="color-dot" style="background: #0d47a1;" data-name="Azul Escuro"></div>
+                                <div class="color-dot" style="background: #1976d2;" data-name="Azul Ral 5015"></div>
+                                <div class="color-dot" style="background: #b71c1c;" data-name="Vermelho Segurança"></div>
+                                <div class="color-dot" style="background: #e65100;" data-name="Laranja"></div>
+                                <div class="color-dot" style="background: #ffeb3b;" data-name="Amarelo Segurança"></div>
+                                <div class="color-dot" style="background: #1b5e20;" data-name="Verde Escuro"></div>
+                                <div class="color-dot" style="background: #b8860b;" data-name="Bronze / Ouro Velho"></div>
+                                <div class="color-dot" style="background: #a8a8a8;" data-name="Alumínio Opaco"></div>
+                                <div class="color-dot" style="background: #e3e4e5;" data-name="Off-White"></div>
+                                <div class="color-dot" style="background: #2c3e50;" data-name="Grafite Escuro"></div>
+                                <div class="color-dot" style="background: #34495e;" data-name="Grafite Texturizado"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Serviço 2: Jateamento -->
+                <div class="service-block reverse">
+                    <div class="service-visual"><img src="jateamento.png" alt="Jateamento"></div>
+                    <div class="service-desc">
+                        <span class="tag">Preparação Mecânica</span>
+                        <h3>Jateamento Industrial</h3>
+                        <p>A aderência ideal de qualquer revestimento começa com o jateamento abrasivo. O processo remove de forma completa crostas de laminação, oxidações, tintas antigas e impurezas químicas, criando um perfil de rugosidade microscópico perfeito para a fixação permanente da tinta eletrostática no metal base.</p>
+                    </div>
+                </div>
+
+                <!-- Serviço 3: Fosfatização -->
+                <div class="service-block">
+                    <div class="service-visual"><img src="fosfatização.jpeg" alt="Fosfatização"></div>
+                    <div class="service-desc">
+                        <span class="tag">Proteção Química</span>
+                        <h3>Fosfatização Química</h3>
+                        <p>Indicada para ambientes severos ou peças expostas a agentes agressivos, a fosfatização consiste em um tratamento químico que converte a superfície metálica em uma camada microcristalina de fosfatos inertes. Além de atuar como barreira isolante ativa contra a oxidação secundária, maximiza drasticamente a durabilidade global do acabamento.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CTA DA ABA SERVIÇOS -->
+            <div class="cta-box">
+                <h3>Identificou o tratamento ideal para seu material?</h3>
+                <p>Seja jateamento isolado, lotes seriados de pintura a pó ou proteção química robusta, nós temos o setup técnico pronto para processar.</p>
+                <div class="cta-buttons">
+                    <button class="btn-filled" onclick="redirectToHomeForm()"><i class="fa-solid fa-file-signature"></i> Solicitar Orçamento Técncio</button>
+                    <a href="https://wa.me/5547999984246" target="_blank" class="btn-outline" style="text-decoration: none;"><i class="fa-brands fa-whatsapp"></i> Falar com Especialista</a>
                 </div>
             </div>
         </section>
 
-        <section id="servicos" class="tab-content">
-            <div class="product-card">
-                <div class="product-img-large"><img src="pint.jpg" alt="Pintura"></div>
-                <div class="product-info"><h3>Pintura Eletrostática a Pó</h3><p>Acabamento impecável com alta resistência mecânica.</p></div>
+
+        <!-- ==================== ABA 3: PORTFÓLIO ==================== -->
+        <section id="portfolio" class="tab-content">
+            <div class="section-header">
+                <h2>Nossos <b>Resultados</b></h2>
+                <p>A excelência técnica convertida em projetos reais. Clique nas imagens para ampliar os detalhes do acabamento de alto padrão.</p>
             </div>
-            <div class="product-card">
-                <div class="product-img-large"><img src="jateamento.png" alt="Jateamento"></div>
-                <div class="product-info"><h3>Jateamento</h3><p>Preparação profunda da superfície para máxima aderência.</p></div>
+            
+            <div class="portfolio-grid">
+                <div class="portfolio-item" onclick="openModal(this)"><img src="foto1.jpeg"><div class="portfolio-overlay"><p>Peças Técnicas</p></div></div>
+                <div class="portfolio-item" onclick="openModal(this)"><img src="foto2.jpeg"><div class="portfolio-overlay"><p>Acabamento Industrial</p></div></div>
+                <div class="portfolio-item" onclick="openModal(this)"><img src="foto3.jpeg"><div class="portfolio-overlay"><p>Pintura de Precisão</p></div></div>
+                <div class="portfolio-item" onclick="openModal(this)"><img src="foto4.jpeg"><div class="portfolio-overlay"><p>Lotes Seriados</p></div></div>
+                <div class="portfolio-item" onclick="openModal(this)"><img src="foto5.jpeg"><div class="portfolio-overlay"><p>Resistência Estrutural</p></div></div>
+                <div class="portfolio-item" onclick="openModal(this)"><img src="foto6.jpeg"><div class="portfolio-overlay"><p>Proteção Anticorrosiva</p></div></div>
+                <div class="portfolio-item" onclick="openModal(this)"><img src="https://images.unsplash.com/photo-1513467535987-fd81bc7d62f8?w=500"><div class="portfolio-overlay"><p>Metais Selecionados</p></div></div>
+                <div class="portfolio-item" onclick="openModal(this)"><img src="https://images.unsplash.com/photo-1534394416964-598288591871?w=500"><div class="portfolio-overlay"><p>Linha Industrial</p></div></div>
+                <div class="portfolio-item" onclick="openModal(this downtime)"><img src="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=500"><div class="portfolio-overlay"><p>Estruturas Complexas</p></div></div>
+                <div class="portfolio-item" onclick="openModal(this)"><img src="https://images.unsplash.com/photo-1581093458791-9f3c3900df4b?w=500"><div class="portfolio-overlay"><p>Controle de Qualidade</p></div></div>
+                <div class="portfolio-item" onclick="openModal(this)"><img src="https://images.unsplash.com/photo-1516733725897-1aa73b87c8e8?w=500"><div class="portfolio-overlay"><p>Proteção Sob Medida</p></div></div>
+                <div class="portfolio-item" onclick="openModal(this)"><img src="https://images.unsplash.com/photo-1541625602330-2277a4c4b28d?w=500"><div class="portfolio-overlay"><p>Acabamento Finalizado</p></div></div>
             </div>
-            <div class="product-card">
-                <div class="product-img-large"><img src="fosfatização.jpeg" alt="Fosfatização"></div>
-                <div class="product-info"><h3>Fosfatização Química</h3><p>Tratamento anticorrosivo de longa duração para ambientes severos.</p></div>
+
+            <!-- CTA DA ABA PORTFÓLIO -->
+            <div class="cta-box">
+                <h3>Gostou da qualidade visual e uniformidade dos nossos lotes?</h3>
+                <p>Sua produção pode ter esse exato padrão de acabamento estético e durabilidade contra agressões do tempo.</p>
+                <div class="cta-buttons">
+                    <button class="btn-filled" onclick="redirectToHomeForm()"><i class="fa-solid fa-calculator"></i> Cotar Meu Projeto</button>
+                    <a href="https://wa.me/5547999984246" target="_blank" class="btn-outline" style="text-decoration: none;"><i class="fa-brands fa-whatsapp"></i> Enviar Desenho Técnico</a>
+                </div>
             </div>
         </section>
 
-        <section id="portfolio" class="tab-content">
-            <h2 style="text-align: center; margin-bottom: 40px; font-size: 2.5rem;">Nossos <b>Resultados</b></h2>
-            <div class="portfolio-grid">
-                <div class="portfolio-item" onclick="openModal(this)"><img src="foto1.jpeg"></div>
-                <div class="portfolio-item" onclick="openModal(this)"><img src="foto2.jpeg"></div>
-                <div class="portfolio-item" onclick="openModal(this)"><img src="foto3.jpeg"></div>
-                <div class="portfolio-item" onclick="openModal(this)"><img src="foto4.jpeg"></div>
-                <div class="portfolio-item" onclick="openModal(this)"><img src="foto5.jpeg"></div>
-                <div class="portfolio-item" onclick="openModal(this)"><img src="foto6.jpeg"></div>
-                <div class="portfolio-item" onclick="openModal(this)"><img src="https://images.unsplash.com/photo-1513467535987-fd81bc7d62f8?w=500"></div>
-                <div class="portfolio-item" onclick="openModal(this)"><img src="https://images.unsplash.com/photo-1534394416964-598288591871?w=500"></div>
-                <div class="portfolio-item" onclick="openModal(this)"><img src="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=500"></div>
-                <div class="portfolio-item" onclick="openModal(this)"><img src="https://images.unsplash.com/photo-1581093458791-9f3c3900df4b?w=500"></div>
-                <div class="portfolio-item" onclick="openModal(this)"><img src="https://images.unsplash.com/photo-1516733725897-1aa73b87c8e8?w=500"></div>
-                <div class="portfolio-item" onclick="openModal(this)"><img src="https://images.unsplash.com/photo-1541625602330-2277a4c4b28d?w=500"></div>
+
+        <!-- ==================== ABA 4: SOBRE NÓS ==================== -->
+        <section id="jornada" class="tab-content">
+            <div class="section-header">
+                <h2>Tradição e Rigor Técnico em <b>Pomerode</b></h2>
+                <p>Nossa dedicação consiste em blindar insumos metálicos e valorizar o produto de nossos clientes através de processos de alto padrão.</p>
+            </div>
+
+            <div class="about-story">
+                <div class="about-img"><img src="image_ed7afc.jpg" alt="Unidade New Epoxi"></div>
+                <div class="about-text">
+                    <p>A <b>New Epoxi Pinturas</b> nasceu para preencher uma lacuna fundamental no mercado metalmecânico catarinense: a demanda por acabamentos de alto desempenho que combinem precisão milimétrica e prazos de entrega rigorosos.</p>
+                    <p>Sediada estrategicamente no polo industrial de <b>Pomerode - SC</b>, nossa estrutura foi projetada para lidar de forma ágil tanto com lotes complexos e peças customizadas quanto com grandes volumes de produção seriada. Investimos constantemente em insumos homologados e maquinários modernos para garantir eficiência contínua do início ao fim.</p>
+                    <p>Mais do que simples prestadores de serviços, atuamos como parceiros estratégicos dos nossos clientes. Entendemos que uma pintura de alto nível agrega valor estético direto ao produto final e garante que as peças suportem os testes do tempo e de ambientes severos.</p>
+                </div>
+            </div>
+
+            <!-- CTA DA ABA SOBRE NÓS (LEVA AOS SERVIÇOS OU CONTATO) -->
+            <div class="cta-box">
+                <h3>Pronto para elevar o nível de proteção das suas peças?</h3>
+                <p>Una a tradição técnica de Pomerode com a máxima agilidade de entrega do polo catarinense.</p>
+                <div class="cta-buttons">
+                    <button class="btn-filled" onclick="showTab('servicos')"><i class="fa-solid fa-layer-group"></i> Ver Nossos Serviços</button>
+                    <button class="btn-outline" onclick="redirectToHomeForm()"><i class="fa-solid fa-envelope-open-text"></i> Iniciar Orçamento</button>
+                </div>
             </div>
         </section>
 
     </div>
 
+    <!-- RODAPÉ PREMIUM -->
     <footer>
-        <p>NEW EPOXI PINTURAS © 2026 | Qualidade Industrial Premium</p>
+        <div class="footer-container">
+            <div class="footer-brand">
+                <h3>NEW<span>EPOXI</span></h3>
+                <p>Acabamento Industrial Premium e Engenharia de Superfícies.</p>
+            </div>
+            <div class="footer-info">
+                <h4><i class="fa-solid fa-location-dot"></i> Onde Estamos</h4>
+                <p>Zona Industrial, Pomerode - SC</p>
+                <p>Atendimento ao Polo Catarinense e Região</p>
+            </div>
+            <div class="footer-info">
+                <h4><i class="fa-solid fa-address-book"></i> Contato Direto</h4>
+                <p><i class="fa-brands fa-whatsapp"></i> (47) 99998-4246</p>
+                <p><i class="fa-solid fa-envelope"></i> contato@newepoxi.com.br</p>
+            </div>
+            <div class="footer-links">
+                <h4>Navegação</h4>
+                <ul>
+                    <li onclick="showTab('inicio')">Início</li>
+                    <li onclick="showTab('servicos')">Serviços</li>
+                    <li onclick="showTab('portfolio')">Portfólio</li>
+                    <li onclick="showTab('jornada')">Sobre Nós</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>NEW EPOXI PINTURAS © 2026 | Todos os direitos reservados | Qualidade Industrial Premium</p>
+        </div>
     </footer>
 
     <script>
         function showTab(tabId) {
             document.querySelectorAll('.tab-content').forEach(s => s.classList.remove('active'));
             document.querySelectorAll('.nav-links li').forEach(l => l.classList.remove('active'));
+            document.querySelectorAll('.bottom-nav-item').forEach(l => l.classList.remove('active'));
             
             const target = document.getElementById(tabId);
-            const link = document.getElementById('link-' + tabId);
+            const desktopLink = document.getElementById('link-' + tabId);
+            const mobileLink = document.getElementById('m-link-' + tabId);
             
             if (target) {
                 target.classList.add('active');
-                if(link) link.classList.add('active');
+                if(desktopLink) desktopLink.classList.add('active');
+                if(mobileLink) mobileLink.classList.add('active');
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             }
+        }
+
+        // Funções auxiliares para navegação fluida nos CTAs
+        function scrollToForm() {
+            document.getElementById('orcamento-form').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function redirectToHomeForm() {
+            showTab('inicio');
+            setTimeout(() => {
+                scrollToForm();
+            }, 300); // Pequeno delay para esperar a animação de fade da aba terminar
         }
 
         function openModal(element) {
@@ -243,27 +541,22 @@
             document.getElementById('modal').style.display = "none";
         }
 
-        // --- NOVA FUNÇÃO PARA O WHATSAPP ---
         function enviarWhatsApp(event) {
-            event.preventDefault(); // Impede o recarregamento da página
+            event.preventDefault();
 
-            // COLOQUE SEU NÚMERO AQUI (Com 55 + DDD)
             const meuTelefone = "5547999984246"; 
 
-            // Pega os dados dos campos
             const nome = document.getElementById('form-nome').value;
             const servico = document.getElementById('form-servico').value;
             const contato = document.getElementById('form-contato').value;
             const mensagem = document.getElementById('form-mensagem').value;
 
-            // Monta o texto ( %0A é o código para pular linha )
             const texto = `*Solicitação de Orçamento - New Epoxi*%0A%0A` +
                           `*Nome/Empresa:* ${nome}%0A` +
                           `*Serviço:* ${servico}%0A` +
                           `*Contato:* ${contato}%0A` +
                           `*Detalhes:* ${mensagem}`;
 
-            // Cria o link e abre
             const url = `https://wa.me/${meuTelefone}?text=${texto}`;
             
             window.open(url, '_blank');
