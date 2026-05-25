@@ -182,12 +182,9 @@
             background: #0b0f0d; border-top: 1px solid var(--border); padding: 60px 0 20px; 
             margin-top: 100px; font-size: 0.9rem; color: var(--text-muted);
         }
-        .footer-logo img {
-            height: 45px;
-            object-fit: contain;
-            margin-bottom: 15px;
-        }
         .footer-container { max-width: 1200px; margin: 0 auto; padding: 0 20px; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; margin-bottom: 40px; }
+        .footer-brand h3 { color: white; font-weight: 800; letter-spacing: 2px; margin-bottom: 15px; }
+        .footer-brand h3 span { color: var(--accent); }
         .footer-info h4, .footer-links h4 { color: white; font-weight: 700; margin-bottom: 20px; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 1px; }
         .footer-info p { margin-bottom: 12px; display: flex; align-items: center; gap: 10px; line-height: 1.5; }
         .footer-info i { color: var(--accent); }
@@ -221,9 +218,7 @@
 
     <!-- NAVEGAÇÃO SUPERIOR (DESKTOP) -->
     <nav>
-    <div class="logo" onclick="showTab('inicio')">
-    <img src="logo.png" alt="New Epoxi">
-    </div>
+        <div class="logo" onclick="showTab('inicio')">NEW<span>EPOXI</span></div>
         <ul class="nav-links">
             <li onclick="showTab('inicio')" id="link-inicio" class="active">Início</li>
             <li onclick="showTab('servicos')" id="link-servicos">Serviços</li>
@@ -469,47 +464,38 @@
     </div>
 
     <!-- RODAPÉ PREMIUM -->
-<footer>
-    <div class="footer-container">
-
-        <div class="footer-brand">
-            <div class="footer-logo">
-                <img src="logo.png" alt="New Epoxi">
+    <footer>
+        <div class="footer-container">
+            <div class="footer-brand">
+                <h3>NEW<span>EPOXI</span></h3>
+                <p>Pintura Eletrotática, Jateamento e Fosfatização.</p>
             </div>
-            <p>Pintura Eletrostática, Jateamento e Fosfatização.</p>
+            <div class="footer-info">
+                <h4><i class="fa-solid fa-location-dot"></i> Onde Estamos</h4>
+                <p>Rua Afonso Koch, 127, Testo Central - Pomerode/SC</p>
+                <p>Atendimento ao Polo Catarinense e Região</p>
+            </div>
+            <div class="footer-info">
+                <h4><i class="fa-solid fa-address-book"></i> Contato Direto</h4>
+                <p><i class="fa-brands fa-whatsapp"></i> (47) 99998-4246</p>
+                <p><i class="fa-solid fa-envelope"></i> comercial@newepoxipint.com.br</p>
+            </div>
+            <div class="footer-links">
+                <h4>Navegação</h4>
+                <ul>
+                    <li onclick="showTab('inicio')">Início</li>
+                    <li onclick="showTab('servicos')">Serviços</li>
+                    <li onclick="showTab('portfolio')">Portfólio</li>
+                    <li onclick="showTab('jornada')">Sobre Nós</li>
+                </ul>
+            </div>
         </div>
-
-        <div class="footer-info">
-            <h4><i class="fa-solid fa-location-dot"></i> Onde Estamos</h4>
-            <p>Rua Afonso Koch, 127, Testo Central - Pomerode/SC</p>
-            <p>Atendimento ao Polo Catarinense e Região</p>
+        <div class="footer-bottom">
+            <p>NEW EPOXI PINTURA © 2026 | Todos os direitos reservados | Qualidade Desejada por Muitos</p>
         </div>
-
-        <div class="footer-info">
-            <h4><i class="fa-solid fa-address-book"></i> Contato Direto</h4>
-            <p><i class="fa-brands fa-whatsapp"></i> (47) 99998-4246</p>
-            <p><i class="fa-solid fa-envelope"></i> comercial@newepoxipint.com.br</p>
-        </div>
-
-        <div class="footer-links">
-            <h4>Navegação</h4>
-            <ul>
-                <li onclick="showTab('inicio')">Início</li>
-                <li onclick="showTab('servicos')">Serviços</li>
-                <li onclick="showTab('portfolio')">Portfólio</li>
-                <li onclick="showTab('jornada')">Sobre Nós</li>
-            </ul>
-        </div>
-
-    </div>
-
-    <div class="footer-bottom">
-        <p>NEW EPOXI PINTURA © 2026 | Todos os direitos reservados | Qualidade Desejada por Muitos</p>
-    </div>
-</footer>
+    </footer>
 
     <script>
-
         function showTab(tabId) {
             document.querySelectorAll('.tab-content').forEach(s => s.classList.remove('active'));
             document.querySelectorAll('.nav-links li').forEach(l => l.classList.remove('active'));
